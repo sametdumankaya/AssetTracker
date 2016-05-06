@@ -1,0 +1,46 @@
+﻿<Window x:Class="AssetTracker.RenameStock"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AssetTracker"
+		WindowStartupLocation="CenterScreen"
+		FocusManager.FocusedElement="{Binding ElementName=_newStockName}"
+		Topmost="True"
+		ResizeMode="NoResize"
+        mc:Ignorable="d"
+        Title="Stoğu Yeniden Adlandır" Height="180" Width="360" Icon="Images/Dental-WF.ico">
+    <Grid>
+		<Grid Margin="8">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="3*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="2*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Yeni stok ismi :"
+					   Height="16"
+					   HorizontalAlignment="Left"
+					   VerticalAlignment="Center"/>
+			<TextBox Grid.Column="1"
+					 ToolTip="Yeni stok ismini buraya girin."
+					 KeyUp="_newStockName_KeyUp"
+					 Height="16"
+					 x:Name="_newStockName"/>
+			
+			<Button Grid.Row="1"
+					Width="120"
+					x:Name="_ok"
+					FontWeight="Bold"
+					Click="Button_Click"
+					Foreground="White"
+					Background="SteelBlue"
+					Content="Tamam"
+					Height="24"
+					Grid.ColumnSpan="2"/>
+
+		</Grid>
+    </Grid>
+</Window>

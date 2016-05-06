@@ -1,0 +1,67 @@
+﻿<Window x:Class="AssetTracker.SpendStock"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AssetTracker"
+        mc:Ignorable="d"
+		Topmost="True"
+		FocusManager.FocusedElement="{Binding ElementName=_barcode}"
+		WindowStartupLocation="CenterScreen"
+		ResizeMode="NoResize"
+        Title="Stok Harca" 
+		Height="400"
+		Width="600"
+		Icon="Images/Dental-WF.ico">
+	<Grid>
+		<Grid Margin="8">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="2*"/>
+				<ColumnDefinition Width="3*"/>
+				<ColumnDefinition Width="3*"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="Barkodu okutun:"
+					   VerticalAlignment="Center"
+					   HorizontalAlignment="Left"/>
+
+			<TextBox Grid.Column="1"
+					 KeyUp="_barcode_KeyUp"
+					 ToolTip="Buraya tıklayıp barkodu okutun. Barkod numarasını manuel olarak da girebilirsiniz. Manuel olarak giriş yaptıktan sonra Enter tuşuna basın"
+					 x:Name="_barcode"
+					 Height="16"/>
+
+			<Grid Grid.Column="2">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="7*"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<TextBlock Text="Harcananlar"
+						   Margin="8,0,0,0"
+						   TextDecorations="Underline"
+						   FontWeight="Bold"
+						   HorizontalAlignment="Left"
+						   VerticalAlignment="Center"/>
+				<ListView x:Name="_listView" Grid.Row="1" Margin="8" ToolTip="Harcanan ürünler bu tabloda gösterilir.">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<TextBlock Margin="0,0,0,8"
+                                   Text="{Binding}"
+                                   Foreground="Black"/>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+				<Button Grid.Row="2"
+						Click="Button_Click"
+						ToolTip="Harcama işlemini bitirmek için bu tuşa tıklayın."
+						FontWeight="Bold"
+						Foreground="White"
+						Content="Tamam"
+						Margin="8,4,8,4"
+						Background="ForestGreen"/>
+			</Grid>
+			
+		</Grid>
+	</Grid>
+</Window>

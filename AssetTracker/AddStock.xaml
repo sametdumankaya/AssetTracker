@@ -1,0 +1,82 @@
+﻿<Window x:Class="AssetTracker.AddStock"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AssetTracker"
+        mc:Ignorable="d"
+		Topmost="True"
+		ResizeMode="NoResize"
+		FocusManager.FocusedElement="{Binding ElementName=_barcode}"
+		WindowStartupLocation="CenterScreen"
+        Title="Stok Ekle" Height="180" Width="360" Icon="Images/Dental-WF.ico">
+    <Grid>
+		<Grid Margin="8">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="2*"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Text="Barkod :"
+						   Height="16"
+						   VerticalAlignment="Center"
+						   HorizontalAlignment="Left"/>
+				<TextBox Grid.Column="1"
+						 KeyUp="_barcode_KeyUp"
+						 PreviewTextInput="_barcode_PreviewTextInput"
+						 MaxLength="20"
+						 ToolTip="Buraya tıklayıp barkodu okutun."
+						 x:Name="_barcode"
+						 Height="16"/>
+			</Grid>
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="2*"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Text="Stok İsmi :"						   
+						   Height="16"
+						   VerticalAlignment="Center"
+						   HorizontalAlignment="Left"/>
+				<TextBox Grid.Column="1"
+						 x:Name="_stockName"
+						 ToolTip="Eklemek istediğiniz ürünün ismini girin."
+						 Height="16"/>
+			</Grid>
+			<Grid Grid.Row="2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="2*"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Text="Adet :"
+						   Height="16"
+						   VerticalAlignment="Center"
+						   HorizontalAlignment="Left"/>
+				<TextBox Grid.Column="1"
+						 KeyUp="_count_KeyUp"
+						 MaxLength="6"
+						 x:Name="_count"
+						 PreviewTextInput="_barcode_PreviewTextInput"
+						 ToolTip="Eklemek istediğiniz üründen kaç adet olduğunu girin."
+						 Height="16"/>
+			</Grid>
+
+			<Button Grid.Row="3"
+					x:Name="_ok"
+					Click="Button_Click"
+					Width="120"
+					Background="SteelBlue"
+					Foreground="White"
+					FontWeight="Bold"
+					Content="Stok Ekle"
+					Height="24"/>
+
+		</Grid>
+    </Grid>
+</Window>

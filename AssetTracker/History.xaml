@@ -1,0 +1,231 @@
+﻿<Window x:Class="AssetTracker.History"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:AssetTracker"
+        mc:Ignorable="d"
+		Topmost="False"
+		WindowState="Maximized"
+		ResizeMode="CanMinimize"
+        Title="Geçmiş"
+		Icon="Images/Dental-WF.ico">
+    <Grid>
+		<Grid Margin="8">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<Image Width="32"
+				   ToolTip="Bir önceki sayfaya gitmek için buraya tıklayın."
+				   MouseLeftButtonUp="Image_MouseLeftButtonUp"
+				   Margin="8,0,0,8"
+				   Cursor="Hand"
+				   HorizontalAlignment="Left"
+				   Source="Images/Previous.png"/>
+
+			<TabControl Grid.Row="1">
+				<TabItem Header="Harcananlar">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="7*"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+
+							<StackPanel Margin="8,0,0,0" Orientation="Horizontal">
+								<TextBlock Text="Filtre :"
+									   VerticalAlignment="Center"/>
+								<ComboBox Height="24"
+										  x:Name="_spentComboBox"
+										  DisplayMemberPath="Name"
+										  SelectionChanged="_comboBox_SelectionChanged"
+										  IsEditable="True"
+										  Text="Ürün seçin"
+										  IsReadOnly="True"
+										  Margin="16,0,0,0"
+										  Width="240"/>
+							</StackPanel>
+							
+							<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,8,0" Grid.Column="1">
+								<TextBlock Text="Başlangıç:"
+									   VerticalAlignment="Center"/>
+
+								<DatePicker VerticalAlignment="Center"
+										SelectedDateChanged="_start_SelectedDateChanged"
+										x:Name="_start"
+										Margin="16,0,0,0"
+										SelectedDateFormat="Short"
+										>
+									<DatePicker.Resources>
+										<Style TargetType="DatePickerTextBox">
+											<Setter Property="IsReadOnly" Value="True"/>
+										</Style>
+									</DatePicker.Resources>
+								</DatePicker>
+								<TextBlock Text="Bitiş:"
+									   Margin="16,0,0,0"
+									   VerticalAlignment="Center"/>
+								<DatePicker VerticalAlignment="Center"
+										x:Name="_end"
+										SelectedDateChanged="_start_SelectedDateChanged"
+										Margin="16,0,0,0"
+										SelectedDateFormat="Short"
+										>
+									<DatePicker.Resources>
+										<Style TargetType="DatePickerTextBox">
+											<Setter Property="IsReadOnly" Value="True"/>
+										</Style>
+									</DatePicker.Resources>
+								</DatePicker>
+							</StackPanel>
+						</Grid>
+						
+						
+						
+						<DataGrid x:Name="_spentDataGrid" Margin="8" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+							<DataGrid.ColumnHeaderStyle>
+								<Style TargetType="{x:Type DataGridColumnHeader}">
+									<Setter Property="FontSize" Value="24"/>
+									<Setter Property="FontWeight" Value="Bold"/>
+									<Setter Property="FontFamily" Value="Candara"/>
+									<Setter Property="HorizontalContentAlignment" Value="Center" />
+								</Style>
+							</DataGrid.ColumnHeaderStyle>
+							<DataGrid.Resources>
+								<Style TargetType="{x:Type DataGridColumnHeader}">
+									<Setter Property="HorizontalContentAlignment" Value="Center" />
+								</Style>
+								<Style TargetType="DataGridCell">
+									<Setter Property="TextBlock.TextAlignment" Value="Center" />
+								</Style>
+							</DataGrid.Resources>
+							<DataGrid.Columns>
+								<DataGridTextColumn Header="Barkod Numarası" Binding="{Binding Barcode}" Width="*"  FontSize="18" />
+								<DataGridTextColumn Header="Stok İsmi" Binding="{Binding Name}" Width="*"  FontSize="18"/>
+								<DataGridTextColumn Header="Harcanan Adet" Binding="{Binding SpentCount}" Width="*"  FontSize="18"/>
+								<DataGridTextColumn Header="Harcanma Tarihi" Binding="{Binding SpendingDate, StringFormat='dd MMMM yyyy - HH:mm'}" Width="*"  FontSize="18"/>
+							</DataGrid.Columns>
+						</DataGrid>
+
+						<Grid Grid.Row="2" Margin="8,0,8,0">
+							<TextBlock x:Name="_totalProduct"
+									   VerticalAlignment="Center"
+									   FontWeight="Bold"
+									   FontSize="24"
+									   HorizontalAlignment="Right"
+									   FontFamily="Lucida Bright"/>
+						</Grid>
+						
+					</Grid>
+					
+				</TabItem>
+				<TabItem Header="Eklenenler">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="7*"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+
+							<StackPanel Margin="8,0,0,0" Orientation="Horizontal">
+								<TextBlock Text="Filtre :"
+									   VerticalAlignment="Center"/>
+								<ComboBox Height="24"
+										  x:Name="_addedComboBox"
+										  DisplayMemberPath="Name"
+										  SelectionChanged="_addedComboBox_SelectionChanged"
+										  IsEditable="True"
+										  Text="Ürün seçin"
+										  IsReadOnly="True"
+										  Margin="16,0,0,0"
+										  Width="240"/>
+
+
+							</StackPanel>
+
+
+							<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,8,0" Grid.Column="1">
+								<TextBlock Text="Başlangıç:"
+									   VerticalAlignment="Center"/>
+								<DatePicker VerticalAlignment="Center"
+										x:Name="_start2"
+										SelectedDateChanged="_start2_SelectedDateChanged"
+										Margin="16,0,0,0"
+										SelectedDateFormat="Short">
+									<DatePicker.Resources>
+										<Style TargetType="DatePickerTextBox">
+											<Setter Property="IsReadOnly" Value="True"/>
+										</Style>
+									</DatePicker.Resources>
+								</DatePicker>
+								<TextBlock Text="Bitiş:"
+									   Margin="16,0,0,0"
+									   VerticalAlignment="Center"/>
+								<DatePicker VerticalAlignment="Center"
+										SelectedDateChanged="_start2_SelectedDateChanged"
+										x:Name="_end2"
+										Margin="16,0,0,0"
+										SelectedDateFormat="Short">
+									<DatePicker.Resources>
+										<Style TargetType="DatePickerTextBox">
+											<Setter Property="IsReadOnly" Value="True"/>
+										</Style>
+									</DatePicker.Resources>
+								</DatePicker>
+							</StackPanel>
+						</Grid>
+
+						
+						<DataGrid x:Name="_addedDataGrid" Margin="8" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+							<DataGrid.ColumnHeaderStyle>
+								<Style TargetType="{x:Type DataGridColumnHeader}">
+									<Setter Property="FontSize" Value="24"/>
+									<Setter Property="FontWeight" Value="Bold"/>
+									<Setter Property="FontFamily" Value="Candara"/>
+									<Setter Property="HorizontalContentAlignment" Value="Center" />
+								</Style>
+							</DataGrid.ColumnHeaderStyle>
+							<DataGrid.Resources>
+								<Style TargetType="{x:Type DataGridColumnHeader}">
+									<Setter Property="HorizontalContentAlignment" Value="Center" />
+								</Style>
+								<Style TargetType="DataGridCell">
+									<Setter Property="TextBlock.TextAlignment" Value="Center" />
+								</Style>
+							</DataGrid.Resources>
+							<DataGrid.Columns>
+								<DataGridTextColumn Header="Barkod Numarası" Binding="{Binding Barcode}" Width="*" FontSize="18"/>
+								<DataGridTextColumn Header="Stok İsmi" Binding="{Binding Name}" Width="*"  FontSize="18"/>
+								<DataGridTextColumn Header="Eklenen Adet" Binding="{Binding AddCount}" Width="*"  FontSize="18"/>
+								<DataGridTextColumn Header="Eklenme Tarihi" Binding="{Binding AddingDate, StringFormat='dd MMMM yyyy - HH:mm'}" Width="*"  FontSize="18"/>
+							</DataGrid.Columns>
+						</DataGrid>
+						<Grid Grid.Row="2" Margin="8,0,8,0">
+							<TextBlock x:Name="_totalProduct2"
+									   VerticalAlignment="Center"
+									   FontWeight="Bold"
+									   FontSize="24"
+									   HorizontalAlignment="Right"
+									   FontFamily="Lucida Bright"/>
+						</Grid>
+					</Grid>
+				</TabItem>
+			</TabControl>
+		</Grid>
+    </Grid>
+</Window>
