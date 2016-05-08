@@ -247,5 +247,17 @@ namespace AssetTracker
 				_totalProduct2.Text = "Bu kriterlere uyan hiçbir ürün bulunamadı.";
 			}
 		}
+
+		private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if(_spentTab.IsSelected)
+			{
+				_textBlock.Text = "Harcananlar";
+			}
+			else
+			{
+				_textBlock.Text = "Eklenenler";
+			}
+		}
 	}
 }

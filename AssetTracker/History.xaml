@@ -11,7 +11,7 @@
 		ResizeMode="CanMinimize"
         Title="Geçmiş"
 		Icon="Images/Dental-WF.ico">
-    <Grid>
+	<Grid>
 		<Grid Margin="8">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"/>
@@ -26,8 +26,15 @@
 				   HorizontalAlignment="Left"
 				   Source="Images/Previous.png"/>
 
-			<TabControl Grid.Row="1">
-				<TabItem Header="Harcananlar">
+			<TextBlock VerticalAlignment="Center"
+					   x:Name="_textBlock"
+					   FontSize="32"
+					   FontStyle="Italic"
+					   Text="Harcananlar"
+					   HorizontalAlignment="Center"/>
+
+			<TabControl Grid.Row="1" SelectionChanged="TabControl_SelectionChanged">
+				<TabItem Header="Harcananlar" x:Name="_spentTab">
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="*"/>
@@ -54,7 +61,7 @@
 										  Margin="16,0,0,0"
 										  Width="240"/>
 							</StackPanel>
-							
+
 							<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,8,0" Grid.Column="1">
 								<TextBlock Text="Başlangıç:"
 									   VerticalAlignment="Center"/>
@@ -88,10 +95,8 @@
 								</DatePicker>
 							</StackPanel>
 						</Grid>
-						
-						
-						
-						<DataGrid x:Name="_spentDataGrid" Margin="8" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+
+						<DataGrid x:Name="_spentDataGrid" Margin="8" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#7DF9FF" AlternationCount="2">
 							<DataGrid.ColumnHeaderStyle>
 								<Style TargetType="{x:Type DataGridColumnHeader}">
 									<Setter Property="FontSize" Value="24"/>
@@ -109,10 +114,57 @@
 								</Style>
 							</DataGrid.Resources>
 							<DataGrid.Columns>
-								<DataGridTextColumn Header="Barkod Numarası" Binding="{Binding Barcode}" Width="*"  FontSize="18" />
-								<DataGridTextColumn Header="Stok İsmi" Binding="{Binding Name}" Width="*"  FontSize="18"/>
-								<DataGridTextColumn Header="Harcanan Adet" Binding="{Binding SpentCount}" Width="*"  FontSize="18"/>
-								<DataGridTextColumn Header="Harcanma Tarihi" Binding="{Binding SpendingDate, StringFormat='dd MMMM yyyy - HH:mm'}" Width="*"  FontSize="18"/>
+								<DataGridTemplateColumn Header="Barkod Numarası" Width="*" IsReadOnly="True">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Barcode}" 
+												   HorizontalAlignment="Center"
+												   VerticalAlignment="Center"
+												   TextAlignment="Center"
+												   FontSize="18"
+												   TextWrapping="Wrap"/>
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+
+								<DataGridTemplateColumn Header="Stok İsmi" Width="*" IsReadOnly="True">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Name}" 
+												   HorizontalAlignment="Center"
+												   VerticalAlignment="Center"
+												   TextAlignment="Center"
+												   FontSize="18"
+												   TextWrapping="Wrap"/>
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+
+								<DataGridTemplateColumn Header="Harcanan Adet" Width="*" IsReadOnly="True">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding SpentCount}" 
+												   HorizontalAlignment="Center"
+												   VerticalAlignment="Center"
+												   TextAlignment="Center"
+												   FontSize="18"
+												   TextWrapping="Wrap"/>
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+
+								<DataGridTemplateColumn Header="Harcanma Tarihi" Width="*" IsReadOnly="True">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding SpendingDate, StringFormat='dd MMMM yyyy - HH:mm'}" 
+												   HorizontalAlignment="Center"
+												   VerticalAlignment="Center"
+												   TextAlignment="Center"
+												   FontSize="18"
+												   TextWrapping="Wrap"/>
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
 							</DataGrid.Columns>
 						</DataGrid>
 
@@ -124,11 +176,10 @@
 									   HorizontalAlignment="Right"
 									   FontFamily="Lucida Bright"/>
 						</Grid>
-						
 					</Grid>
-					
 				</TabItem>
-				<TabItem Header="Eklenenler">
+
+				<TabItem Header="Eklenenler" x:Name="_addedTab">
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="*"/>
@@ -154,10 +205,7 @@
 										  IsReadOnly="True"
 										  Margin="16,0,0,0"
 										  Width="240"/>
-
-
 							</StackPanel>
-
 
 							<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,8,0" Grid.Column="1">
 								<TextBlock Text="Başlangıç:"
@@ -190,8 +238,7 @@
 							</StackPanel>
 						</Grid>
 
-						
-						<DataGrid x:Name="_addedDataGrid" Margin="8" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+						<DataGrid x:Name="_addedDataGrid" Margin="8" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#7DF9FF" AlternationCount="2">
 							<DataGrid.ColumnHeaderStyle>
 								<Style TargetType="{x:Type DataGridColumnHeader}">
 									<Setter Property="FontSize" Value="24"/>
@@ -209,10 +256,55 @@
 								</Style>
 							</DataGrid.Resources>
 							<DataGrid.Columns>
-								<DataGridTextColumn Header="Barkod Numarası" Binding="{Binding Barcode}" Width="*" FontSize="18"/>
-								<DataGridTextColumn Header="Stok İsmi" Binding="{Binding Name}" Width="*"  FontSize="18"/>
-								<DataGridTextColumn Header="Eklenen Adet" Binding="{Binding AddCount}" Width="*"  FontSize="18"/>
-								<DataGridTextColumn Header="Eklenme Tarihi" Binding="{Binding AddingDate, StringFormat='dd MMMM yyyy - HH:mm'}" Width="*"  FontSize="18"/>
+								<DataGridTemplateColumn Header="Barkod Numarası" Width="*" IsReadOnly="True">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Barcode}" 
+												   HorizontalAlignment="Center"
+												   VerticalAlignment="Center"
+												   TextAlignment="Center"
+												   FontSize="18"
+												   TextWrapping="Wrap"/>
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+								<DataGridTemplateColumn Header="Stok İsmi" Width="*" IsReadOnly="True">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Name}" 
+												   HorizontalAlignment="Center"
+												   VerticalAlignment="Center"
+												   TextAlignment="Center"
+												   FontSize="18"
+												   TextWrapping="Wrap"/>
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+								<DataGridTemplateColumn Header="Eklenen Adet" Width="*" IsReadOnly="True">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding AddCount}" 
+												   HorizontalAlignment="Center"
+												   VerticalAlignment="Center"
+												   TextAlignment="Center"
+												   FontSize="18"
+												   TextWrapping="Wrap"/>
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+
+								<DataGridTemplateColumn Header="Eklenme Tarihi" Width="*" IsReadOnly="True">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding  AddingDate, StringFormat='dd MMMM yyyy - HH:mm'}" 
+												   HorizontalAlignment="Center"
+												   VerticalAlignment="Center"
+												   TextAlignment="Center"
+												   FontSize="18"
+												   TextWrapping="Wrap"/>
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
 							</DataGrid.Columns>
 						</DataGrid>
 						<Grid Grid.Row="2" Margin="8,0,8,0">
@@ -227,5 +319,5 @@
 				</TabItem>
 			</TabControl>
 		</Grid>
-    </Grid>
+	</Grid>
 </Window>

@@ -28,13 +28,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_73501323984C12738BC65DB46D22C0AC"
+        "OwnerKey" = "8:_1957937B7F974062B5CD96009D6FCBB0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1957937B7F974062B5CD96009D6FCBB0"
+        "OwnerKey" = "8:_73501323984C12738BC65DB46D22C0AC"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -55,6 +55,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -108,7 +116,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.5"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.5.2"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=395269"
                 }
@@ -215,7 +223,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Stok Takip"
         "ProductCode" = "8:{19AEE9C9-DFE3-4C03-BA15-FB26DAFD4ABC}"
-        "PackageCode" = "8:{2B0C8B6B-6A88-49A7-BB8B-838B6AEDFBD8}"
+        "PackageCode" = "8:{93C14458-B41D-4029-83F2-CAFF80899D4A}"
         "UpgradeCode" = "8:{23F6A4B6-93C3-4B61-A712-BA74F39B3790}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

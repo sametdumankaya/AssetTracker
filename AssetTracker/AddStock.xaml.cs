@@ -25,6 +25,7 @@ namespace AssetTracker
 					if (lp.Barcode.Equals(barcode))
 					{
 						lp.Count += count;
+						lp.LastDateAdded = DateTime.Now;
 						break;
 					}
 				}
@@ -72,6 +73,7 @@ namespace AssetTracker
 						{
 							MessageBox.Show("Bu ürün daha önce stoğa eklenmiş. Stok sayısı artırıldı.", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Information);
 							p.Count += countToAdd;
+							p.LastDateAdded = DateTime.Now;
 							MainWindow.addedProducts.Add(new AddedProduct(barcodeToAdd, stockNameToAdd, countToAdd, DateTime.Now));
 							AddStockInCategories(barcodeToAdd, countToAdd);
 							CleanAndFocus();
