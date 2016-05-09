@@ -18,13 +18,17 @@
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 
+
+
 			<Image Width="32"
-				   ToolTip="Bir önceki sayfaya gitmek için buraya tıklayın."
-				   MouseLeftButtonUp="Image_MouseLeftButtonUp"
-				   Margin="8,0,0,8"
-				   Cursor="Hand"
-				   HorizontalAlignment="Left"
-				   Source="Images/Previous.png"/>
+					   x:Name="_back"
+					   MouseLeftButtonUp="Image_MouseLeftButtonUp"
+					   Margin="8,0,0,8"
+					   Cursor="Hand"
+					   ToolTip="Bir önceki sayfaya gitmek için buraya tıklayın."
+					   HorizontalAlignment="Left"
+					   Source="Images/Previous.png"/>
+
 
 			<TextBlock VerticalAlignment="Center"
 					   x:Name="_textBlock"
@@ -96,7 +100,7 @@
 							</StackPanel>
 						</Grid>
 
-						<DataGrid x:Name="_spentDataGrid" Margin="8" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#7DF9FF" AlternationCount="2">
+						<DataGrid x:Name="_spentDataGrid" Margin="8" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#7DF9FF" AlternationCount="2" >
 							<DataGrid.ColumnHeaderStyle>
 								<Style TargetType="{x:Type DataGridColumnHeader}">
 									<Setter Property="FontSize" Value="24"/>
@@ -114,7 +118,7 @@
 								</Style>
 							</DataGrid.Resources>
 							<DataGrid.Columns>
-								<DataGridTemplateColumn Header="Barkod Numarası" Width="*" IsReadOnly="True">
+								<DataGridTemplateColumn Header="Barkod Numarası" Width="*" IsReadOnly="True" CanUserSort="True" SortMemberPath="Barcode">
 									<DataGridTemplateColumn.CellTemplate>
 										<DataTemplate>
 											<TextBlock Text="{Binding Barcode}" 
@@ -127,7 +131,7 @@
 									</DataGridTemplateColumn.CellTemplate>
 								</DataGridTemplateColumn>
 
-								<DataGridTemplateColumn Header="Stok İsmi" Width="*" IsReadOnly="True">
+								<DataGridTemplateColumn Header="Stok İsmi" Width="*" IsReadOnly="True" CanUserSort="True" SortMemberPath="Name">
 									<DataGridTemplateColumn.CellTemplate>
 										<DataTemplate>
 											<TextBlock Text="{Binding Name}" 
@@ -140,7 +144,7 @@
 									</DataGridTemplateColumn.CellTemplate>
 								</DataGridTemplateColumn>
 
-								<DataGridTemplateColumn Header="Harcanan Adet" Width="*" IsReadOnly="True">
+								<DataGridTemplateColumn Header="Harcanan Adet" Width="*" IsReadOnly="True" CanUserSort="True" SortMemberPath="SpentCount">
 									<DataGridTemplateColumn.CellTemplate>
 										<DataTemplate>
 											<TextBlock Text="{Binding SpentCount}" 
@@ -153,7 +157,7 @@
 									</DataGridTemplateColumn.CellTemplate>
 								</DataGridTemplateColumn>
 
-								<DataGridTemplateColumn Header="Harcanma Tarihi" Width="*" IsReadOnly="True">
+								<DataGridTemplateColumn Header="Harcanma Tarihi" Width="*" IsReadOnly="True" CanUserSort="True" SortMemberPath="SpendingDate">
 									<DataGridTemplateColumn.CellTemplate>
 										<DataTemplate>
 											<TextBlock Text="{Binding SpendingDate, StringFormat='dd MMMM yyyy - HH:mm'}" 
@@ -256,7 +260,7 @@
 								</Style>
 							</DataGrid.Resources>
 							<DataGrid.Columns>
-								<DataGridTemplateColumn Header="Barkod Numarası" Width="*" IsReadOnly="True">
+								<DataGridTemplateColumn Header="Barkod Numarası" Width="*" IsReadOnly="True"  CanUserSort="True" SortMemberPath="Barcode">
 									<DataGridTemplateColumn.CellTemplate>
 										<DataTemplate>
 											<TextBlock Text="{Binding Barcode}" 
@@ -268,7 +272,7 @@
 										</DataTemplate>
 									</DataGridTemplateColumn.CellTemplate>
 								</DataGridTemplateColumn>
-								<DataGridTemplateColumn Header="Stok İsmi" Width="*" IsReadOnly="True">
+								<DataGridTemplateColumn Header="Stok İsmi" Width="*" IsReadOnly="True"  CanUserSort="True" SortMemberPath="Name">
 									<DataGridTemplateColumn.CellTemplate>
 										<DataTemplate>
 											<TextBlock Text="{Binding Name}" 
@@ -280,7 +284,7 @@
 										</DataTemplate>
 									</DataGridTemplateColumn.CellTemplate>
 								</DataGridTemplateColumn>
-								<DataGridTemplateColumn Header="Eklenen Adet" Width="*" IsReadOnly="True">
+								<DataGridTemplateColumn Header="Eklenen Adet" Width="*" IsReadOnly="True" CanUserSort="True" SortMemberPath="AddCount">
 									<DataGridTemplateColumn.CellTemplate>
 										<DataTemplate>
 											<TextBlock Text="{Binding AddCount}" 
@@ -293,7 +297,7 @@
 									</DataGridTemplateColumn.CellTemplate>
 								</DataGridTemplateColumn>
 
-								<DataGridTemplateColumn Header="Eklenme Tarihi" Width="*" IsReadOnly="True">
+								<DataGridTemplateColumn Header="Eklenme Tarihi" Width="*" IsReadOnly="True" CanUserSort="True" SortMemberPath="AddingDate">
 									<DataGridTemplateColumn.CellTemplate>
 										<DataTemplate>
 											<TextBlock Text="{Binding  AddingDate, StringFormat='dd MMMM yyyy - HH:mm'}" 
