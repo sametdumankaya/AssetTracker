@@ -16,6 +16,28 @@ namespace AssetTracker
 			InitializeComponent();
 			productToRename = stockToRename;
 		}
+
+		private void RenameStockName(string oldStockName, string newStockName)
+		{
+			foreach (LeftProduct lp in MainWindow.products)
+			{
+				if(lp.Name.Equals(oldStockName))
+				{
+					lp.Name = newStockName;
+				}
+			}
+
+			foreach (Category c in MainWindow.categories)
+			{
+				foreach (LeftProduct lp in c.ProductList)
+				{
+					if(lp.Name.Equals(oldStockName))
+					{
+						lp.Name = newStockName;
+					}
+				}
+			}
+		}
 		
 		//rename stock
 		private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,14 +56,14 @@ namespace AssetTracker
 
 						if(result == MessageBoxResult.Yes)
 						{
-							productToRename.Name = _newStockName.Text.Trim();
+							RenameStockName(productToRename.Name, _newStockName.Text.Trim());
 							MessageBox.Show("Stok ismi başarıyla değiştirildi.", "Bilgi", MessageBoxButton.OK, MessageBoxImage.Information);
 							Close();
 						}
 						return;
 					}
 				}
-				productToRename.Name = _newStockName.Text.Trim();
+				RenameStockName(productToRename.Name, _newStockName.Text.Trim());
 				MessageBox.Show("Stok ismi başarıyla değiştirildi.", "Bilgi", MessageBoxButton.OK, MessageBoxImage.Information);
 				Close();
 			}

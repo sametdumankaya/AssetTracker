@@ -42,7 +42,6 @@
 					Content="Tamam"
 					Height="24"
 					Grid.ColumnSpan="2"/>
-
 		</Grid>
 	</Grid>
 </Window>

@@ -15,6 +15,9 @@ namespace AssetTracker
 		{
 			InitializeComponent();
 
+			MainWindow.spentProducts.Sort();
+			MainWindow.addedProducts.Sort();
+
 			_spentDataGrid.ItemsSource = MainWindow.spentProducts;
 			_addedDataGrid.ItemsSource = MainWindow.addedProducts;
 

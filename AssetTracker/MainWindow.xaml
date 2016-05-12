@@ -9,7 +9,8 @@
         Title="Stok Takip" 
 		Activated="Window_Activated"
         WindowState="Maximized"
-        ResizeMode="CanMinimize" Icon="Images/Dental-WF.ico">
+        ResizeMode="CanMinimize"
+		Icon="Images/Dental-WF.ico">
 	<Grid>
 		<Grid>
 			<Grid>
@@ -137,16 +138,44 @@
                                   SelectionChanged="_listView_SelectionChanged"
                                   SelectionMode="Single"
                                   x:Name="_listView">
+
+							<ListView.Resources>
+								<ContextMenu x:Key="MyElementMenu">
+									<MenuItem Header="Kategoriyi Sil" Click="MenuItem_Click_2">
+										<MenuItem.Icon>
+											<Image Source="Images/Folder-Delete-01.png"/>
+										</MenuItem.Icon>
+									</MenuItem>
+									<MenuItem Header="Kategorinin İsmini Değiştir" Click="MenuItem_Click_3">
+										<MenuItem.Icon>
+											<Image Source="Images/categoryEdit.png"/>
+										</MenuItem.Icon>
+									</MenuItem>
+									<MenuItem Header="Kategoriyi Düzenle" Click="MenuItem_Click_4">
+										<MenuItem.Icon>
+											<Image Source="Images/Folder-Edit.png"/>
+										</MenuItem.Icon>
+									</MenuItem>
+								</ContextMenu>
+
+							</ListView.Resources>
+
+							<ListView.ItemContainerStyle>
+								<Style TargetType="ListViewItem">
+									<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+									<Setter Property="ContextMenu" Value="{StaticResource MyElementMenu}"/>
+								</Style>
+							</ListView.ItemContainerStyle>
+
 							<ListView.ItemTemplate>
 								<DataTemplate>
 									<TextBlock FontSize="20"
-											   TextAlignment="Left"
-											   HorizontalAlignment="Stretch"
-											   Cursor="Hand"
+												   Cursor="Hand"
+												 TextAlignment="Left"
                                                    Margin="0,16,0,16"
                                                    Text="{Binding Name}"
                                                    Foreground="Black"/>
-
+									
 								</DataTemplate>
 							</ListView.ItemTemplate>
 						</ListView>
@@ -193,7 +222,7 @@
 				</Grid>
 
 				<Grid Grid.Row="1">
-					<DataGrid Margin="6,0,10,16" x:Name="_dataGrid" IsReadOnly="True" AutoGenerateColumns="False" AlternatingRowBackground="#7DF9FF" AlternationCount="2">
+					<DataGrid Margin="6,0,10,16" x:Name="_dataGrid" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" AlternatingRowBackground="Lavender" AlternationCount="2">
 						<DataGrid.ColumnHeaderStyle>
 							<Style TargetType="{x:Type DataGridColumnHeader}">
 								<Setter Property="FontSize" Value="24"/>
@@ -215,6 +244,7 @@
 										<TextBlock Text="{Binding Barcode}" 
 												   HorizontalAlignment="Center"
 												   VerticalAlignment="Center"
+												   Margin="8,0,8,0"
 												   TextAlignment="Center"
 												   FontSize="18"
 												   TextWrapping="Wrap"/>
@@ -229,6 +259,7 @@
 												   HorizontalAlignment="Center"
 												   VerticalAlignment="Center"
 												   TextAlignment="Center"
+												   Margin="8,0,8,0"
 												   FontSize="18"
 												   TextWrapping="Wrap"/>
 									</DataTemplate>
@@ -242,6 +273,7 @@
 												   HorizontalAlignment="Center"
 												   VerticalAlignment="Center"
 												   TextAlignment="Center"
+												   Margin="8,0,8,0"
 												   FontSize="18"
 												   TextWrapping="Wrap"/>
 									</DataTemplate>
@@ -255,6 +287,7 @@
 												   HorizontalAlignment="Center"
 												   VerticalAlignment="Center"
 												   TextAlignment="Center"
+												   Margin="8,0,8,0"
 												   FontSize="18"
 												   TextWrapping="Wrap"/>
 									</DataTemplate>

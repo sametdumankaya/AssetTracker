@@ -57,16 +57,7 @@ namespace AssetTracker
 			}		
 		}
 
-		private void ControlForDepletedProducts()
-		{
-			foreach (LeftProduct p in products.ToList())
-			{
-				if(p.Count == 0)
-				{
-					products.Remove(p);
-				}
-			}
-		}
+		
 
 		public void ControlForEmptyCategories()
 		{
@@ -197,7 +188,6 @@ namespace AssetTracker
 			{
 				_mainWindow.IsEnabled = true;
 				ControlForEmptyCategories();
-				ControlForDepletedProducts();
 				RefreshDataGrid();
 				RefreshCategoryList();
 				holder = !holder;
@@ -237,7 +227,6 @@ namespace AssetTracker
 					}
 
 					ControlForEmptyCategories();
-					ControlForDepletedProducts();
 					RefreshDataGrid();
 					RefreshCategoryList();
 					
@@ -337,7 +326,61 @@ namespace AssetTracker
 			new History().Show();
 			_mainWindow.IsEnabled = false;
 		}
-
 		
+		//delete category
+		private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+		{
+			var selectedCategory = (_listView.SelectedItem as Category);
+
+			if (selectedCategory != null)
+			{
+				MessageBoxResult result = MessageBox.Show(selectedCategory.Name + " isimli kategoriyi gerçekten silmek istiyor musunuz?",
+					"Onayla",
+					MessageBoxButton.YesNo,
+					MessageBoxImage.Question);
+				if (result == MessageBoxResult.Yes)
+				{
+					categories.Remove(selectedCategory);
+					RefreshCategoryList();
+					_showAll.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+				}
+			}
+			else
+			{
+				MessageBox.Show("Lütfen silmek için bir kategori seçin.", "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+		}
+
+		//rename category
+		private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+		{
+			var selectedCategory = (_listView.SelectedItem as Category);
+
+			if (selectedCategory != null)
+			{
+				new RenameCategory(selectedCategory, _textBlock).Show();
+				_mainWindow.IsEnabled = false;
+			}
+			else
+			{
+				MessageBox.Show("Lütfen yeniden adlandırmak için bir kategori seçin.", "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+		}
+		
+		//edit category
+		private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+		{
+			var selectedCategory = (_listView.SelectedItem as Category);
+
+			if(selectedCategory != null)
+			{
+				new EditCategory(selectedCategory).Show();
+				_mainWindow.IsEnabled = false;
+			}
+			else
+			{
+				MessageBox.Show("Lütfen düzenlemek için bir kategori seçin.", "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+		}
 	}
 }

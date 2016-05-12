@@ -13,9 +13,9 @@
 		Height="400"
 		Width="600"
 		Icon="Images/Dental-WF.ico">
+	
 	<Grid>
 		<Grid Margin="8">
-
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="2*"/>
 				<ColumnDefinition Width="3*"/>

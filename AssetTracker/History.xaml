@@ -100,7 +100,7 @@
 							</StackPanel>
 						</Grid>
 
-						<DataGrid x:Name="_spentDataGrid" Margin="8" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#7DF9FF" AlternationCount="2" >
+						<DataGrid x:Name="_spentDataGrid" Margin="8" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="Lavender" AlternationCount="2" >
 							<DataGrid.ColumnHeaderStyle>
 								<Style TargetType="{x:Type DataGridColumnHeader}">
 									<Setter Property="FontSize" Value="24"/>
@@ -242,7 +242,7 @@
 							</StackPanel>
 						</Grid>
 
-						<DataGrid x:Name="_addedDataGrid" Margin="8" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="#7DF9FF" AlternationCount="2">
+						<DataGrid x:Name="_addedDataGrid" Margin="8" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="Lavender" AlternationCount="2">
 							<DataGrid.ColumnHeaderStyle>
 								<Style TargetType="{x:Type DataGridColumnHeader}">
 									<Setter Property="FontSize" Value="24"/>

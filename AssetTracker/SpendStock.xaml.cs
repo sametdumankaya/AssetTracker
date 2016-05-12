@@ -20,6 +20,11 @@ namespace AssetTracker
 			spent = new List<string>();
 		}
 
+		private void AlertUserForLowStock(LeftProduct lp)
+		{
+			MessageBox.Show(lp.Name + " isimli üründen " + lp.Count.ToString() +  " adet kaldı.", "Uyarı", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+		}
+
 		private void DropStockFromCategories(string barcode)
 		{
 			foreach (Category cat in MainWindow.categories)
@@ -35,19 +40,6 @@ namespace AssetTracker
 			}
 		}
 
-		private void DeleteDepletedStock(LeftProduct product)
-		{
-			MainWindow.products.Remove(product);
-
-			foreach (Category c in MainWindow.categories)
-			{
-				if (c.ProductList.ToList().Contains(product))
-				{
-					c.ProductList.Remove(product);
-				}
-			}
-		}
-
 		protected override void OnClosing(CancelEventArgs e)
 		{
 			MainWindow.holder = !MainWindow.holder;
@@ -59,6 +51,12 @@ namespace AssetTracker
 			if (e.Key == Key.Return)
 			{
 				var barcode = _barcode.Text.Trim();
+
+				if(barcode.Length == 0)
+				{
+					return;
+				}
+
 				LeftProduct productToSpent = FindProduct(barcode);
 
 				if (productToSpent != null)
@@ -72,10 +70,11 @@ namespace AssetTracker
 						_barcode.Text = "";
 						DropStockFromCategories(productToSpent.Barcode);
 
-						if (productToSpent.Count == 0)
+						if(productToSpent.Count < 11)
 						{
-							DeleteDepletedStock(productToSpent);
+							AlertUserForLowStock(productToSpent);
 						}
+
 					}
 					else
 					{
