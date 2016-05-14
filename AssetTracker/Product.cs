@@ -32,5 +32,10 @@ namespace AssetTracker
 		{
 			return barcode.Equals(other.barcode);
 		}
+
+		public override int GetHashCode()
+		{
+			return Barcode.GetHashCode();
+		}
 	}
 }

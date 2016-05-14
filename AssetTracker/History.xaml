@@ -8,7 +8,7 @@
         mc:Ignorable="d"
 		Topmost="False"
 		WindowState="Maximized"
-		ResizeMode="CanMinimize"
+		ResizeMode="NoResize"
         Title="Geçmiş"
 		Icon="Images/Dental-WF.ico">
 	<Grid>
@@ -17,8 +17,6 @@
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-
-
 
 			<Image Width="32"
 					   x:Name="_back"

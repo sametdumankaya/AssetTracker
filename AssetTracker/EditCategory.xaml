@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:AssetTracker"
         mc:Ignorable="d"
 		Topmost="True"
+		ResizeMode="NoResize"
 		WindowStartupLocation="CenterScreen"
         Title="Kategori Düzenle" 
 		Height="400" 
@@ -13,8 +14,9 @@
 	<Grid>
 		<Grid Margin="8">
 			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="15*"/>
 				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="15*"/>
 			</Grid.ColumnDefinitions>
 
 			<Grid>
@@ -57,12 +59,120 @@
 					</ListView.ItemTemplate>
 				</ListView>
 
-				<Button Grid.Row="2" Background="Red" Margin="16,8,16,8">
+				<Button Grid.Row="2" Margin="16,8,16,8" Click="Button_Click" Cursor="Hand">
+					<Button.Style>
+						<Style TargetType="{x:Type Button}">
+							<Setter Property="Background" Value="#FF364B49"/>
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="{x:Type Button}">
+										<Border Background="{TemplateBinding Background}">
+											<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+										</Border>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver" Value="True">
+									<Setter Property="Background" Value="Red"/>
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
 					<StackPanel Orientation="Horizontal">
 						<Image Source="Images/DeleteWhite.png"
 							   VerticalAlignment="Center"
 								   Height="48"/>
 						<TextBlock Text="Seçilenleri Kategoriden Sil"
+								   Foreground="White"
+								   TextWrapping="WrapWithOverflow"
+								   FontWeight="DemiBold"
+							       HorizontalAlignment="Center"
+								   VerticalAlignment="Center"/>
+					</StackPanel>
+				</Button>
+			</Grid>
+
+			<Grid Grid.Column="1" Margin="0,50,0,50">
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+				</StackPanel>
+			</Grid>
+
+			<Grid Grid.Column="2">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="5*"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<TextBlock Text="Kategori Dışındaki Stoklar"
+						   VerticalAlignment="Center"
+						   FontSize="18"
+						   FontWeight="DemiBold"
+						   TextAlignment="Center"
+						   HorizontalAlignment="Left"/>
+
+				<ListView Grid.Row="1" x:Name="_outCategoryListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+					<ListView.ItemContainerStyle>
+						<Style TargetType="ListViewItem">
+							<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+						</Style>
+					</ListView.ItemContainerStyle>
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<Grid Margin="0,4,0,4">
+								<CheckBox Name="_checkBox"
+										  VerticalAlignment="Center"
+										  VerticalContentAlignment="Center"
+										  FontSize="14"
+										  Unchecked="_checkBox_Unchecked_1"
+										  Checked="_checkBox_Checked_1">
+
+									<TextBlock HorizontalAlignment="Left"
+												   VerticalAlignment="Center"
+												   TextWrapping="Wrap" 
+												   Text="{Binding Name}"/>
+
+								</CheckBox>
+							</Grid>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+
+				<Button Grid.Row="2" Margin="16,8,16,8" Click="Button_Click_1" Cursor="Hand">
+					<Button.Style>
+						<Style TargetType="{x:Type Button}">
+							<Setter Property="Background" Value="#FF364B49"/>
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="{x:Type Button}">
+										<Border Background="{TemplateBinding Background}">
+											<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+										</Border>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver" Value="True">
+									<Setter Property="Background" Value="ForestGreen"/>
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="Images/DeleteWhite.png"
+							   VerticalAlignment="Center"
+								   Height="48" RenderTransformOrigin="0.5,0.5">
+							<Image.RenderTransform>
+								<TransformGroup>
+									<ScaleTransform/>
+									<SkewTransform/>
+									<RotateTransform Angle="45"/>
+									<TranslateTransform/>
+								</TransformGroup>
+							</Image.RenderTransform>
+						</Image>
+						<TextBlock Text="Seçilenleri Kategoriye Ekle"
 								   Foreground="White"
 								   TextWrapping="WrapWithOverflow"
 								   FontWeight="DemiBold"
