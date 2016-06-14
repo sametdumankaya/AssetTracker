@@ -53,6 +53,7 @@ namespace AssetTracker
 			}
 		}
 
+		//On closing window
 		protected override void OnClosing(CancelEventArgs e)
 		{
 			MainWindow.holder = !MainWindow.holder;
